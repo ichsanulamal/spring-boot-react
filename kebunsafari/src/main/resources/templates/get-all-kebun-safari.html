@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Seluruh Kebun Safari</title>
+</head>
+<body>
+<h2>Detail Seluruh Kebun Safari</h2>
+<div th:each="kebunSafari : ${listKebunSafari}">
+    <h3 th:text="'ID kebun Safari : ' + ${kebunSafari.idKebunSafari} "></h3>
+    <p th:text="'Nama Kebun Safari : ' + ${kebunSafari.namaKebunSafari} "></p>
+    <p th:text="'Alamat : ' + ${kebunSafari.alamat} "></p>
+    <p th:text="'Nomor Telepon : ' + ${kebunSafari.noTelepon} "></p>
+</div>
+</body>
+</html>
