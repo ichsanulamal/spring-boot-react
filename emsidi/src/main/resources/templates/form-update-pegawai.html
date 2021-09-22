@@ -16,7 +16,8 @@
         <br>
         <form th:action="@{/pegawai/update}" th:object="${pegawai}" method="POST">
           <input type="hidden" th:field="*{noPegawai}" />
-          <input type="hidden" th:field="${noCabang}" />
+
+          <input class="form-control" type="hidden" name="noCabang" th:value="${noCabang}"/>
 
           Nama Pegawai : <br>
           <input class="form-control" type="text" name="namaPegawai" th:value="*{namaPegawai}"/>

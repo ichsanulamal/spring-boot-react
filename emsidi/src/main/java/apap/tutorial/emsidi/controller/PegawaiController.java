@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import apap.tutorial.emsidi.service.CabangService;
 
@@ -53,11 +50,10 @@ public class PegawaiController {
         if (pegawai != null) {
             LocalTime time = LocalTime.now();
             if (time.isBefore(pegawai.getCabang().getWaktuBuka()) || time.isAfter(pegawai.getCabang().getWaktuTutup())) {
-                model.addAttribute("noCabang", pegawai.getCabang().getNoCabang());
                 model.addAttribute("pegawai", pegawai);
+                model.addAttribute("noCabang", pegawai.getCabang().getNoCabang());
                 return "form-update-pegawai";
             }
-
         }
         return "error";
     }
@@ -65,18 +61,13 @@ public class PegawaiController {
     @PostMapping("/pegawai/update")
     public String updatePegawaiSubmit(
             @ModelAttribute PegawaiModel pegawai,
+            @RequestParam(value = "noCabang") Long noCabang,
             Model model
     ) {
-        LocalTime time = LocalTime.now();
-
-        if (time.isBefore(pegawai.getCabang().getWaktuBuka()) && time.isAfter(pegawai.getCabang().getWaktuTutup())) {
-            pegawaiService.updatePegawai(pegawai);
-            model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
-            return "update-pegawai";
-        } else {
-            return "error";
-        }
-
+        pegawai.setCabang(cabangService.getCabangByNoCabang(noCabang));
+        pegawaiService.updatePegawai(pegawai);
+        model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
+        return "update-pegawai";
     }
 
     @GetMapping("/pegawai/delete/{noPegawai}")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalTime;
 import java.util.List;
 
 @Controller
@@ -80,8 +81,17 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByNoCabang(noCabang);
-        model.addAttribute("cabang", cabang);
-        return "form-delete-cabang";
+        if (cabang.getListPegawai().toArray().length != 0) return "error";
+
+        LocalTime time = LocalTime.now();
+        if (time.isBefore(cabang.getWaktuBuka()) || time.isAfter(cabang.getWaktuTutup())) {
+            model.addAttribute("cabang", cabang);
+            return "form-delete-cabang";
+        }
+
+        return "error";
+
+
     }
 
     @PostMapping("/cabang/delete")
