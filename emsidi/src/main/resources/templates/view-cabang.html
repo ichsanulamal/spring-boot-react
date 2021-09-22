@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Emsidi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <h2>Detail Cabang</h2>
+                <br>
+                <p th:text="'Nomor Cabang : ' + ${cabang.noCabang}"></p>
+                <p th:text="'Nama Cabang : ' + ${cabang.namaCabang}"></p>
+                <p th:text="'Alamat Cabang : ' + ${cabang.alamatCabang}"></p>
+                <p th:text="'Nomor Telepon Cabang : ' + ${cabang.noTeleponCabang}"></p>
+                <p th:text="'Waktu Buka : ' + ${cabang.waktuBuka}"></p>
+                <p th:text="'Waktu Tutup : ' + ${cabang.waktuTutup}"></p>
+                <div class="col">
+                    <h6>Pegawai : </h6>
+                    <div th:each="pegawai : ${listPegawai}">
+                        <p th:text="'Nama : ' + ${pegawai.namaPegawai}"></p>
+                        <p th:if="${pegawai.jenisKelamin == 0}">Jenis Kelamin : Perempuan</p>
+                        <p th:if="${pegawai.jenisKelamin == 1}">Jenis Kelamin : Laki-laki</p>
+                        <a class="btn btn-primary" th:href="@{/pegawai/update/} + ${pegawai.noPegawai}">Update Pegawai</a>
+                        <a class="btn btn-primary" th:href="@{/pegawai/delete/} + ${pegawai.noPegawai}">Delete Pegawai</a>
+                        <hr>
+                    </div>
+                </div>
+                <br>
+                <a class="btn btn-primary" th:href="@{/pegawai/add/} + ${cabang.noCabang}">Tambah Pegawai</a>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-primary" th:href="@{/cabang/delete/} + ${cabang.noCabang}">Delete Cabang</a>
+    <a class="btn btn-primary" href="/cabang/viewall">Kembali</a>
+</div>
+
+</body>
+
+</html>

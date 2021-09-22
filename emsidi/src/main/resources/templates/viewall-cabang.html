@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <title>Emsidi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h2>Daftar Seluruh Cabang Emsidi</h2>
+    <br>
+    <div th:each="cabang : ${listCabang}" class="card m-4 p-4">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <p th:text="'Nomor Cabang : ' + ${cabang.noCabang}"></p>
+                <p th:text="'Nama Cabang : ' + ${cabang.namaCabang}"></p>
+                <p th:text="'Alamat Cabang : ' + ${cabang.alamatCabang}"></p>
+                <p th:text="'Nomor Telepon Cabang : ' + ${cabang.noTeleponCabang}"></p>
+                <p th:text="'Waktu Buka : ' + ${cabang.waktuBuka}"></p>
+                <p th:text="'Waktu Tutup : ' + ${cabang.waktuTutup}"></p>
+                <br>
+                <a class="btn btn-primary" th:href="@{/cabang/view(noCabang=${cabang.noCabang})}">Lihat Detail
+                    Cabang</a>
+                <a class="btn btn-primary" th:href="@{/cabang/update/} + ${cabang.noCabang}">Update Cabang</a>
+            </div>
+        </div>
+        <br>
+    </div>
+    <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+
+</html>
