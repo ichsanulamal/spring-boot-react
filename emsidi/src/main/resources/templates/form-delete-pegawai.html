@@ -15,7 +15,7 @@
           <input type="hidden" th:field="*{noPegawai}" />
 
           <button class="btn btn-primary" type="submit">Ya</button>
-          <a class="btn btn-primary" href="/pegawai/viewall">Cancel</a>
+          <a class="btn btn-primary" th:href="@{/cabang/view(noCabang=${noCabang})}">Cancel</a>
         </form>
       </div>
     </div>

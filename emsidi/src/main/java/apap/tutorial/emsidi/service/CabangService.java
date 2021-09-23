@@ -10,4 +10,5 @@ public interface CabangService {
 
     List<CabangModel> getCabangList();
     CabangModel getCabangByNoCabang(Long noCabang);
+    boolean isEditValid(CabangModel cabang);
 }

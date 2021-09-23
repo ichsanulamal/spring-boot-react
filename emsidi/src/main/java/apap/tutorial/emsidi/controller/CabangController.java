@@ -81,17 +81,11 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByNoCabang(noCabang);
-        if (cabang.getListPegawai().toArray().length != 0) return "error";
-
-        LocalTime time = LocalTime.now();
-        if (time.isBefore(cabang.getWaktuBuka()) || time.isAfter(cabang.getWaktuTutup())) {
+        if (cabangService.isEditValid(cabang)) {
             model.addAttribute("cabang", cabang);
             return "form-delete-cabang";
         }
-
-        return "error";
-
-
+        return "gagal";
     }
 
     @PostMapping("/cabang/delete")

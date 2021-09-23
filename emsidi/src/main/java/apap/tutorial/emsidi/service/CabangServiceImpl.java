@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +45,17 @@ public class CabangServiceImpl implements CabangService {
         Optional<CabangModel> cabang = cabangDb.findByNoCabang(noCabang);
         if (cabang.isPresent()) return cabang.get();
         return null;
+    }
+
+    @Override
+    public boolean isEditValid(CabangModel cabang) {
+        if (cabang.getListPegawai().toArray().length != 0) return false;
+
+        LocalTime time = LocalTime.now();
+        if (time.isBefore(cabang.getWaktuBuka()) || time.isAfter(cabang.getWaktuTutup())) {
+            return true;
+        }
+        return false;
     }
 
 

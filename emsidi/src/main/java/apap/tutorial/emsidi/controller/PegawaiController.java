@@ -48,14 +48,13 @@ public class PegawaiController {
     public String updatePegawaiForm(@PathVariable Long noPegawai, Model model) {
         PegawaiModel pegawai = pegawaiService.getPegawaiByNoPegawai(noPegawai);
         if (pegawai != null) {
-            LocalTime time = LocalTime.now();
-            if (time.isBefore(pegawai.getCabang().getWaktuBuka()) || time.isAfter(pegawai.getCabang().getWaktuTutup())) {
+            if (pegawaiService.isEditValid(pegawai)) {
                 model.addAttribute("pegawai", pegawai);
                 model.addAttribute("noCabang", pegawai.getCabang().getNoCabang());
                 return "form-update-pegawai";
             }
         }
-        return "error";
+        return "gagal";
     }
 
     @PostMapping("/pegawai/update")
@@ -67,6 +66,7 @@ public class PegawaiController {
         pegawai.setCabang(cabangService.getCabangByNoCabang(noCabang));
         pegawaiService.updatePegawai(pegawai);
         model.addAttribute("namaPegawai", pegawai.getNamaPegawai());
+        model.addAttribute("noCabang", pegawai.getCabang().getNoCabang());
         return "update-pegawai";
     }
 
@@ -76,8 +76,15 @@ public class PegawaiController {
             Model model
     ) {
         PegawaiModel pegawai = pegawaiService.getPegawaiByNoPegawai(noPegawai);
-        model.addAttribute("pegawai", pegawai);
-        return "form-delete-pegawai";
+        if (pegawai != null) {
+            if (pegawaiService.isEditValid(pegawai)) {
+                model.addAttribute("pegawai", pegawai);
+                model.addAttribute("noCabang", pegawai.getCabang().getNoCabang());
+                return "form-delete-pegawai";
+            }
+        }
+        return "gagal";
+
     }
 
     @PostMapping("/pegawai/delete")
@@ -85,8 +92,8 @@ public class PegawaiController {
             @ModelAttribute PegawaiModel pegawai,
             Model model
     ) {
-        pegawaiService.deletePegawai(pegawai);
         model.addAttribute("noPegawai", pegawai.getNoPegawai());
+        pegawaiService.deletePegawai(pegawai);
         return "delete-pegawai";
     }
 

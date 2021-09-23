@@ -8,4 +8,5 @@ public interface PegawaiService {
     void deletePegawai(PegawaiModel pegawai);
 
     PegawaiModel getPegawaiByNoPegawai(long noPegawai);
+    boolean isEditValid(PegawaiModel pegawai);
 }

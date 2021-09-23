@@ -40,6 +40,14 @@ public class PegawaiServiceImpl implements PegawaiService {
         return null;
     }
 
+    @Override
+    public boolean isEditValid(PegawaiModel pegawai) {
+        LocalTime time = LocalTime.now();
+        if (time.isBefore(pegawai.getCabang().getWaktuBuka()) || time.isAfter(pegawai.getCabang().getWaktuTutup())) {
+            return true;
+        }
+        return false;
+    }
 
 
 }

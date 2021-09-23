@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
 <head>
     <title>Emsidi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
@@ -9,9 +9,8 @@
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
-                <h2 th:text="'Pegawai dengan nama ' + ${namaPegawai} + ' berhasil diubah'"></h2>
+                <h2>objek tidak dikenali atau transaksi tidak dapat diproses</h2>
                 <a class="btn btn-primary" href="/">Kembali ke Home</a>
-                <a class="btn btn-primary" th:href="@{/cabang/view(noCabang=${noCabang})}">Kembali</a>
             </div>
         </div>
     </div>
