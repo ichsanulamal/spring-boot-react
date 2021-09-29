@@ -2,8 +2,12 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <title>Emsidi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"></head>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
 <body>
+<nav th:replace="fragments/fragment :: navbar('Cabang')"></nav>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
@@ -29,10 +33,29 @@
 
                     Waktu Tutup : <br>
                     <input required class="form-control" type="time" name="waktuTutup" />
+                    <br><br><br>
+
+                    <b>Nama Menu</b>
+                    <input type="submit" value="Tambah Row" class="btn btn-primary">
+                    <hr>
+
+                    <div th:object="${listMenu}" th:each="row : ${listMenu}">
+                        <select th:value="${row.noMenu}" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <option th:each="menu : ${listMenu}"
+                                    th:value="${menu.noMenu}"
+                                    th:text="${menu.namaMenu}"
+                            >
+                            </option>
+                        </select>
+                    <input type="submit" value="Hapus" class="btn-sm btn-danger">
+                    </div>
+
                     <br><br>
 
                     <button class="btn btn-primary" type="submit">Submit</button>
                     <a class="btn btn-primary" href="/">Cancel</a>
+
+
                 </form>
             </div>
         </div>

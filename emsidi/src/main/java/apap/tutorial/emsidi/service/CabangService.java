@@ -6,9 +6,8 @@ import java.util.List;
 public interface CabangService {
     void addCabang(CabangModel cabang);
     void updateCabang(CabangModel cabang);
-    void deleteCabang(CabangModel cabang);
-
+    void removeCabang(CabangModel cabang);
     List<CabangModel> getCabangList();
+    List<CabangModel> getCabangListSorted();
     CabangModel getCabangByNoCabang(Long noCabang);
-    boolean isEditValid(CabangModel cabang);
 }

@@ -3,11 +3,9 @@ package apap.tutorial.emsidi.service;
 import apap.tutorial.emsidi.model.CabangModel;
 import apap.tutorial.emsidi.repository.CabangDb;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,35 +26,28 @@ public class CabangServiceImpl implements CabangService {
         cabangDb.save(cabang);
     }
 
-    // nomer 4
     @Override
-    public void deleteCabang(CabangModel cabang) {
-        cabangDb.delete(cabang);
+    public List<CabangModel> getCabangList() {
+        return cabangDb.findAll();
     }
 
     @Override
-    public List<CabangModel> getCabangList() {
-        // 1
-        return cabangDb.findAll(Sort.by(Sort.Direction.ASC, "namaCabang"));
+    public List<CabangModel> getCabangListSorted() {
+        return cabangDb.findAllByOrderByNamaCabang();
     }
 
     @Override
     public CabangModel getCabangByNoCabang(Long noCabang) {
         Optional<CabangModel> cabang = cabangDb.findByNoCabang(noCabang);
-        if (cabang.isPresent()) return cabang.get();
+        if (cabang.isPresent()) {
+            return cabang.get();
+        }
         return null;
     }
 
     @Override
-    public boolean isEditValid(CabangModel cabang) {
-        if (cabang.getListPegawai().toArray().length != 0) return false;
-
-        LocalTime time = LocalTime.now();
-        if (time.isBefore(cabang.getWaktuBuka()) || time.isAfter(cabang.getWaktuTutup())) {
-            return true;
-        }
-        return false;
+    public void removeCabang(CabangModel cabang) {
+        cabangDb.delete(cabang);
     }
-
 
 }

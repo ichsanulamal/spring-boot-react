@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <title>Emsidi</title>
+  <meta charset="UTF-8">
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('Menu')"></nav>
+<div class="container">
+  <h2>Daftar Seluruh Menu</h2>
+  <br>
+  <div class="card m-4 p-4">
+    <div class="card-body">
+      <div class="justify-content-center">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>No</th>
+            <th>Nomor Menu</th>
+            <th>Nama Menu</th>
+            <th>Deskripsi Menu</th>
+            <th>Sedang Tersedia</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="menu, iterationStatus: ${listMenu}">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${menu.noMenu}"></td>
+            <td th:text="${menu.namaMenu}"></td>
+            <td th:text="${menu.deskripsiMenu}"></td>
+            <td th:if="${menu.isAvailable == false}" th:text="'YA'"></td>
+            <td th:if="${menu.isAvailable == true}" th:text="'TIDAK'"></td>
+          </tr>
+          </tbody>
+        </table>
+        <br>
+      </div>
+    </div>
+    <br>
+  </div>
+  <a class="btn btn-primary" href="/">Home</a>
+</div>
+
+</body>
+</html>

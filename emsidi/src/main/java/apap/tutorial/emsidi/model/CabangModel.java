@@ -25,18 +25,18 @@ public class CabangModel implements Serializable {
     private Long noCabang;
 
     @NotNull
-    @Size(max = 30)
-    @Column(name = "nama_cabang", nullable = false)
+    @Size(max=30)
+    @Column(name="nama_cabang", nullable = false)
     private String namaCabang;
 
     @NotNull
-    @Size(max = 30)
-    @Column(name = "alamat_cabang", nullable = false)
+    @Size(max=30)
+    @Column(name="alamat_cabang", nullable = false)
     private String alamatCabang;
 
     @NotNull
-    @Size(max = 30)
-    @Column(name = "no_telepon_cabang", nullable = false)
+    @Size(max=30)
+    @Column(name="no_telepon_cabang", nullable = false)
     private String noTeleponCabang;
 
     @NotNull
@@ -49,18 +49,16 @@ public class CabangModel implements Serializable {
     @DateTimeFormat(pattern = "HH:mm")
     private LocalTime waktuTutup;
 
-    // Relasi dengan PegawaiModel
+//    Relasi dengan PegawaiModel
     @OneToMany(mappedBy = "cabang", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PegawaiModel> listPegawai;
 
-    // Relasi dengan MenuModel
+//    Relasi dengan MenuModel
     @ManyToMany
     @JoinTable(
             name = "cabang_menu",
             joinColumns = @JoinColumn(name = "no_cabang"),
-            inverseJoinColumns = @JoinColumn(name = "no_menu")
-    )
+            inverseJoinColumns = @JoinColumn(name = "no_menu"))
     List<MenuModel> listMenu;
-
-
 }
+

@@ -22,14 +22,19 @@ public class MenuModel implements Serializable {
     private Long noMenu;
 
     @NotNull
-    @Size(max = 30)
-    @Column(name = "nama_menu", nullable = false)
+    @Size(max=30)
+    @Column(name="nama_menu", nullable = false)
     private String namaMenu;
 
-    @Column(name = "is_available", nullable = false)
+    @NotNull
+    @Size(max=50)
+    @Column(nullable = false)
+    private String deskripsiMenu;
+
+    @Column(name="is_available", nullable = false)
     private Boolean isAvailable;
 
-    // Relasi dengan CabangModel
+    //Relasi dengan CabangModel
     @ManyToMany(mappedBy = "listMenu")
     List<CabangModel> listCabang;
 }

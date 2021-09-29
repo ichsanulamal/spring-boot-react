@@ -11,6 +11,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class PegawaiModel implements Serializable {
     private long noPegawai;
 
     @NotNull
+    @Size(max = 30)
     @Column(name = "nama_pegawai", nullable = false)
     private String namaPegawai;
 
@@ -31,7 +33,7 @@ public class PegawaiModel implements Serializable {
     @Column(name = "jenis_kelamin", nullable = false)
     private int jenisKelamin;
 
-    // Relasi dengan CabangModel
+    //Relasi dengan CabangModel
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "noCabang", referencedColumnName = "noCabang", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

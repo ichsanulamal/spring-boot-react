@@ -6,6 +6,60 @@
 
 ---
 
+## Tutorial 4
+
+1. Jelaskan perbedaan th:include dan th:replace! 
+
+   Keduanya merupakan cara untuk memasukkan konten dari sebuah fragmen. Perbedaannya adalah, pada relace tagnya diganti dengan tag pada fragment, sedangkan pada include tidak.
+
+   - contoh fragment
+
+   ```
+   <div th:fragment="targetFragmentToIncludeInOurPage" id="tagWithFragmentAttribute">
+    <div id="contentGoesHere"></div>
+   </div>
+   ```
+
+   - penggunaan pada div
+
+   ```
+   <div id="tagWithReplaceAttribute" th:replace="fragments/header :: targetFragmentToIncludeInOurPage"></div>
+   <div id="tagWithInsertAttribute" th:insert="fragments/header :: targetFragmentToIncludeInOurPage"></div>
+   <div id="tagWithIncludeAttribute" th:include="fragments/header :: targetFragmentToIncludeInOurPage"></div>
+   ```
+
+   - hasil
+
+   ```
+   <div id="tagWithFragmentAttribute">
+    <div id="contentGoesHere"></div>
+   </div>
+   
+   <div id="tagWithInsertAttribute">
+    <div id="tagWithFragmentAttribute">
+     <div id="contentGoesHere"></div>
+    </div>
+   </div>
+   
+   <div id="tagWithIncludeAttribute">
+    <div id="contentGoesHere"></div>
+    </div>
+   ```
+
+   
+
+2. Jelaskan apa fungsi dari th:object! 
+
+   th:object digunakan untuk menentukan objek yang akan dibound oleh data pada form yang dikirimkan
+
+3. Jelaskan perbedaan dari * dan $ pada saat penggunaan th:object! Kapan harus dipakai?
+
+   \* digunakan saat ingin mengambil nilai dari atribut pada th:object yang disebutkan, sedangkan cara mengambil nilai dari atribut menggunakan $ adalah dengan `${<nama_objek>.atribut}`. Atau secara singkat ${} berarti variable expressions sedangkan *{} selection variable expressions
+
+
+
+---
+
 ## Tutorial 3
 
 **1. Tolong jelaskan secara singkat apa kegunaan dari anotasi-anotasi yang ada pada model (@AllArgsConstructor, @NoArgsConstructor, @Setter, @Getter, @Entity, @Table)**

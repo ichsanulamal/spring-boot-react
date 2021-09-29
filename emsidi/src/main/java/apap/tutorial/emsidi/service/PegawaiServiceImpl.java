@@ -1,26 +1,29 @@
 package apap.tutorial.emsidi.service;
 
-import apap.tutorial.emsidi.model.CabangModel;
 import apap.tutorial.emsidi.model.PegawaiModel;
 import apap.tutorial.emsidi.repository.PegawaiDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalTime;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 public class PegawaiServiceImpl implements PegawaiService {
+
     @Autowired
     PegawaiDb pegawaiDb;
 
     @Override
     public void addPegawai(PegawaiModel pegawai) {
-
         pegawaiDb.save(pegawai);
+    }
+
+    @Override
+    public PegawaiModel getPegawaiByNoPegawai(Long noPegawai) {
+        Optional<PegawaiModel> penjaga = pegawaiDb.findByNoPegawai(noPegawai);
+        return penjaga.orElse(null);
     }
 
     @Override
@@ -29,25 +32,7 @@ public class PegawaiServiceImpl implements PegawaiService {
     }
 
     @Override
-    public void deletePegawai(PegawaiModel pegawai) {
+    public void removePegawai(PegawaiModel pegawai) {
         pegawaiDb.delete(pegawai);
     }
-
-    @Override
-    public PegawaiModel getPegawaiByNoPegawai(long noPegawai) {
-        Optional<PegawaiModel> pegawai = pegawaiDb.findByNoPegawai(noPegawai);
-        if (pegawai.isPresent()) return pegawai.get();
-        return null;
-    }
-
-    @Override
-    public boolean isEditValid(PegawaiModel pegawai) {
-        LocalTime time = LocalTime.now();
-        if (time.isBefore(pegawai.getCabang().getWaktuBuka()) || time.isAfter(pegawai.getCabang().getWaktuTutup())) {
-            return true;
-        }
-        return false;
-    }
-
-
 }
