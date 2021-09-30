@@ -17,6 +17,9 @@
                 <br>
                 <div th:if="*{listPegawai.size() != 0}">
                     <form th:action="@{/pegawai/delete}" th:object="${cabang}" method="POST">
+                        <input type="hidden" th:field="*{noCabang}" />
+                        <input type="hidden" th:field="*{waktuBuka}" />
+                        <input type="hidden" th:field="*{waktuTutup}" />
                         <table class="table">
                             <thead>
                             <tr>
@@ -43,9 +46,6 @@
                                     <input class="form-check-input" type="checkbox"
                                            th:field="*{listPegawai}" th:value="${pegawai.noPegawai}"
                                            id="flexCheckDefault">
-                                    <input type="hidden" th:field="*{noCabang}" />
-                                    <input type="hidden" th:field="*{waktuBuka}" />
-                                    <input type="hidden" th:field="*{waktuTutup}" />
                                 </td>
                             </tr>
                             </tbody>
@@ -58,6 +58,7 @@
                 </div>
 
                 <div class="justify-content-center">
+
                     <table class="table">
                         <thead>
                         <tr>
@@ -72,14 +73,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="menu : ${listMenu}"
+                        <tr th:each="menu, iterationStatus : ${listMenu}"
                             th:style="${iterationStatus.even} ? 'font-weight:bold;'">
                             <td th:text="${iterationStatus.count}"></td>
                             <td th:text="${menu.noMenu}"></td>
                             <td th:text="${menu.namaMenu}"></td>
                             <td th:text="${menu.deskripsiMenu}"></td>
-                            <td th:if="${menu.isAvailable == 0}" th:text="'Sedang Tersedia : YA'"></td>
-                            <td th:if="${menu.isAvailable == 1}" th:text="'Sedang Tersedia : TIDAK'"></td>
+                            <td th:if="${menu.isAvailable == false}" th:text="'YA'"></td>
+                            <td th:if="${menu.isAvailable == true}" th:text="'TIDAK'"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -87,11 +88,11 @@
                 </div>
 
                 <br>
-                <a class="btn btn-primary" th:href="@{/pegawai/add/} + ${cabang.noCabang}">Tambah Pegawai</a>
             </div>
                 <br>
             </div>
         </div>
+        <a class="btn btn-primary" th:href="@{/pegawai/add/} + ${cabang.noCabang}">Tambah Pegawai</a>
         <a class="btn btn-primary" href="/cabang/viewall">Kembali</a>
     </div>
 

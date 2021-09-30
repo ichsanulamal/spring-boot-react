@@ -16,38 +16,39 @@
                 <br>
                 <form th:action="@{/cabang/add}" th:object="${cabang}" method="POST">
                     Nama Cabang : <br>
-                    <input required class="form-control" type="text" name="namaCabang"/>
+                    <input class="form-control" type="text" name="namaCabang"/>
                     <br><br>
 
                     Alamat : <br>
-                    <input required class="form-control" type="text" name="alamatCabang"/>
+                    <input class="form-control" type="text" name="alamatCabang"/>
                     <br><br>
 
                     Nomor Telepon : <br>
-                    <input required class="form-control" type="text" name="noTeleponCabang"/>
+                    <input class="form-control" type="text" name="noTeleponCabang"/>
                     <br><br>
 
                     Waktu Buka : <br>
-                    <input required class="form-control" type="time" name="waktuBuka" />
+                    <input class="form-control" type="time" name="waktuBuka" />
                     <br><br>
 
                     Waktu Tutup : <br>
-                    <input required class="form-control" type="time" name="waktuTutup" />
+                    <input class="form-control" type="time" name="waktuTutup" />
                     <br><br><br>
 
-                    <b>Nama Menu</b>
-                    <input type="submit" value="Tambah Row" class="btn btn-primary">
+
+                    <b id="menuawkowakok">Nama Menu</b>
+                    <input type="submit" name="tambahMenu" value="Tambah Row" class="btn btn-primary">
                     <hr>
 
-                    <div th:object="${listMenu}" th:each="row : ${listMenu}">
-                        <select th:value="${row.noMenu}" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    <div th:each="row : *{listMenu}">
+                        <select th:field="*{listMenu}" th:value="${row.noMenu}" class="form-control">
                             <option th:each="menu : ${listMenu}"
                                     th:value="${menu.noMenu}"
                                     th:text="${menu.namaMenu}"
                             >
                             </option>
                         </select>
-                    <input type="submit" value="Hapus" class="btn-sm btn-danger">
+                        <input type="submit" name="hapusMenu" value="Hapus" class="btn-sm btn-danger">
                     </div>
 
                     <br><br>

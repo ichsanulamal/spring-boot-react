@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
-import java.awt.*;
 import java.time.LocalTime;
 import java.util.List;
 import java.util.ArrayList;
@@ -28,32 +27,68 @@ public class CabangController {
 
     @GetMapping("/cabang/add")
     public String addCabangForm(Model model) {
-
-        model.addAttribute("cabang", new CabangModel());
-        List<MenuModel> listMenu = new ArrayList<MenuModel>();
+        List<MenuModel> listMenu = new ArrayList<>();
         listMenu.add(new MenuModel());
-        model.addAttribute("listMenuSend", listMenu);
+
+        CabangModel cabang = new CabangModel();
+        cabang.setListMenu(listMenu);
+
+        model.addAttribute("cabang", cabang);
         model.addAttribute("listMenu", menuService.getListMenu());
         return "form-add-cabang";
     }
 
-    @PostMapping("/cabang/add")
+    @PostMapping(value = "/cabang/add")
     public String addCabangSubmit(
             @ModelAttribute CabangModel cabang,
-            @ModelAttribute List<MenuModel> listMenu,
             Model model
     ) {
-        System.out.println(listMenu);
-        cabangService.addCabang(cabang);
-        model.addAttribute("noCabang", cabang.getNoCabang());
-        return "add-cabang";
+        try { // valid form
+            cabangService.addCabang(cabang);
+            model.addAttribute("noCabang", cabang.getNoCabang());
+            return "add-cabang";
+        } catch(Exception e) { //unvalid form
+            model.addAttribute("cabang", cabang);
+            model.addAttribute("listMenu", menuService.getListMenu());
+            return "form-add-cabang";
+        }
+    }
+
+    @PostMapping(value = "/cabang/add", params="tambahMenu")
+    public String tambahMenu(
+            @ModelAttribute CabangModel cabang,
+            Model model
+    ) {
+        try {
+            cabang.getListMenu().add(new MenuModel());
+        } catch(Exception e) {
+            List<MenuModel> m = new ArrayList<>();
+            m.add(new MenuModel());
+            cabang.setListMenu(m);
+        }
+        model.addAttribute("cabang", cabang);
+        model.addAttribute("listMenu", menuService.getListMenu());
+        return "form-add-cabang";
+    }
+
+    @PostMapping(value = "/cabang/add", params="hapusMenu")
+    public String hapusMenu(
+            @ModelAttribute CabangModel cabang,
+            Model model
+    ) {
+        if (cabang.getListMenu().size() > 0) {
+            cabang.getListMenu().remove(0);
+        }
+        model.addAttribute("cabang", cabang);
+        model.addAttribute("listMenu", menuService.getListMenu());
+        return "form-add-cabang";
     }
 
     @GetMapping("/cabang/viewall")
     public String listCabang(Model model) {
         List<CabangModel> listCabang = cabangService.getCabangList();
         model.addAttribute("listCabang", listCabang);
-        model.addAttribute("page", "Cabang");
+        
         return "viewall-cabang";
     }
 
@@ -62,7 +97,7 @@ public class CabangController {
     public String listCabangTerurut(Model model) {
         List<CabangModel> listCabang = cabangService.getCabangListSorted();
         model.addAttribute("listCabang", listCabang);
-        model.addAttribute("page", "Cabang");
+        
         return "viewall-cabang";
     }
 
@@ -73,13 +108,14 @@ public class CabangController {
             Model model
     ) {
         CabangModel cabang = cabangService.getCabangByNoCabang(noCabang);
+        if (cabang == null) return "error/404";
+
         List<PegawaiModel> listPegawai = cabang.getListPegawai();
         List<MenuModel> listMenu = cabang.getListMenu();
 
         model.addAttribute("cabang", cabang);
         model.addAttribute("listPegawai", listPegawai);
         model.addAttribute("listMenu", listMenu);
-        model.addAttribute("page", "Cabang");
 
         return "view-cabang";
     }
