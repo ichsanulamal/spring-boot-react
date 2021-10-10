@@ -9,7 +9,8 @@ import java.util.ArrayList;
 public class KebunSafariInMemoryService implements KebunSafariService {
     private List<KebunSafariModel> listKebunSafari;
 
-    public KebunSafariInMemoryService() {
+    // Constructor
+    public KebunSafariInMemoryService(){
         listKebunSafari = new ArrayList<>();
     }
 
@@ -25,11 +26,33 @@ public class KebunSafariInMemoryService implements KebunSafariService {
 
     @Override
     public KebunSafariModel getKebunSafariByIdKebunSafari(String idKebunSafari) {
-        for (KebunSafariModel kebun: listKebunSafari) {
-            if (kebun.getIdKebunSafari().equals(idKebunSafari)) {
-                return kebun;
+        for (KebunSafariModel kebunSafari : listKebunSafari) {
+            if (kebunSafari.getIdKebunSafari().equals(idKebunSafari)) {
+                return kebunSafari;
             }
         }
         return null;
+    }
+
+    @Override
+    public KebunSafariModel updateNoTeleponKebunSafariByIdKebunSafari(String idKebunSafari, String noTelepon) {
+        for (KebunSafariModel kebunSafari : listKebunSafari) {
+            if (kebunSafari.getIdKebunSafari().equals(idKebunSafari)) {
+                kebunSafari.setNoTelepon(noTelepon);
+                return kebunSafari;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public boolean deleteKebunSafari(String idKebunSafari) {
+        for (KebunSafariModel kebunSafari : listKebunSafari) {
+            if (kebunSafari.getIdKebunSafari().equals(idKebunSafari)) {
+                listKebunSafari.remove(kebunSafari);
+                return true;
+            }
+        }
+        return false;
     }
 }

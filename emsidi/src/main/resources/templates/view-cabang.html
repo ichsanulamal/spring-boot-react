@@ -15,7 +15,13 @@
             <div class="justify-content-center">
                 <h2>Detail Cabang</h2>
                 <br>
-                <div th:if="*{listPegawai.size() != 0}">
+                <p th:text="'Nomor Cabang : ' + ${cabang.noCabang}"></p>
+                <p th:text="'Nama Cabang : ' + ${cabang.namaCabang}"></p>
+                <p th:text="'Alamat Cabang : ' + ${cabang.alamatCabang}"></p>
+                <p th:text="'Nomor Telepon Cabang : ' + ${cabang.noTeleponCabang}"></p>
+                <p th:text="'Waktu Buka : ' + ${cabang.waktuBuka}"></p>
+                <p th:text="'Waktu Tutup : ' + ${cabang.waktuTutup}"></p>
+                <div th:if="*{listPegawai.size()  != 0}">
                     <form th:action="@{/pegawai/delete}" th:object="${cabang}" method="POST">
                         <input type="hidden" th:field="*{noCabang}" />
                         <input type="hidden" th:field="*{waktuBuka}" />
@@ -37,10 +43,10 @@
                                 <td th:text="${iterationStatus.count}"></td>
                                 <td th:text="${pegawai.noPegawai}"></td>
                                 <td th:text="${pegawai.namaPegawai}"></td>
-                                <td th:if="${pegawai.jenisKelamin} == 0">Laki-laki</td>
+                                <td th:if="${pegawai.jenisKelamin} == 0">Laki-Laki</td>
                                 <td th:if="${pegawai.jenisKelamin} == 1">Perempuan</td>
                                 <td>
-                                    <a class="btn btn-primary" th:href="@{/pegawai/update/} + ${pegawai.noPegawai}">Update Pegawai</a>
+                                    <a class="btn btn-sm btn-primary" th:href="@{/pegawai/update/} + ${pegawai.noPegawai}">Update</a>
                                 </td>
                                 <td>
                                     <input class="form-check-input" type="checkbox"
@@ -56,46 +62,36 @@
                 <div th:unless="*{listPegawai.size() != 0}">
                     <h2 th:text="'Tidak ada pegawai'"></h2>
                 </div>
-
-                <div class="justify-content-center">
-
+                <div>
                     <table class="table">
                         <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nomor Menu</th>
-                            <th>Nama Menu</th>
-                            <th>Deskripsi Menu</th>
+                            <th>No Menu</th>
+                            <th>Nama</th>
+                            <th>Deskripsi</th>
                             <th>Sedang Tersedia</th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="menu, iterationStatus : ${listMenu}"
-                            th:style="${iterationStatus.even} ? 'font-weight:bold;'">
-                            <td th:text="${iterationStatus.count}"></td>
+                        <tr th:each="menu, iterationStat : ${cabang.listMenu}"
+                            th:style="${iterationStat.even} ? 'font-weight:bold;'">
+                            <td th:text="${iterationStat.count}"></td>
                             <td th:text="${menu.noMenu}"></td>
                             <td th:text="${menu.namaMenu}"></td>
                             <td th:text="${menu.deskripsiMenu}"></td>
-                            <td th:if="${menu.isAvailable == false}" th:text="'YA'"></td>
-                            <td th:if="${menu.isAvailable == true}" th:text="'TIDAK'"></td>
+                            <td th:if="${menu.isAvailable} == true">YA</td>
+                            <td th:if="${menu.isAvailable} == false">TIDAK</td>
                         </tr>
                         </tbody>
                     </table>
-                    <br>
                 </div>
-
-                <br>
-            </div>
                 <br>
             </div>
         </div>
-        <a class="btn btn-primary" th:href="@{/pegawai/add/} + ${cabang.noCabang}">Tambah Pegawai</a>
-        <a class="btn btn-primary" href="/cabang/viewall">Kembali</a>
     </div>
-
+    <a class="btn btn-primary" th:href="@{/pegawai/add/} + ${cabang.noCabang}">Tambah Pegawai</a>
+    <a class="btn btn-primary" href="/cabang/viewall">Kembali</a>
 </div>
 
 </body>

@@ -12,7 +12,7 @@
 	<artifactId>kebunsafari</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>kebunsafari</name>
-	<description>Project KebunSafari APAP 2021</description>
+	<description>Project KebunSafari APAP2021</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

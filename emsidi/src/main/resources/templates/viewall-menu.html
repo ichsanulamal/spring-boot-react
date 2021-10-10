@@ -13,33 +13,14 @@
 <div class="container">
   <h2>Daftar Seluruh Menu</h2>
   <br>
-  <div class="card m-4 p-4">
+  <div th:each="menu : ${listMenu}" class="card m-4 p-4">
     <div class="card-body">
       <div class="justify-content-center">
-        <table class="table">
-          <thead>
-          <tr>
-            <th>No</th>
-            <th>Nomor Menu</th>
-            <th>Nama Menu</th>
-            <th>Deskripsi Menu</th>
-            <th>Sedang Tersedia</th>
-            <th></th>
-            <th></th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody>
-          <tr th:each="menu, iterationStatus: ${listMenu}">
-            <td th:text="${iterationStatus.count}"></td>
-            <td th:text="${menu.noMenu}"></td>
-            <td th:text="${menu.namaMenu}"></td>
-            <td th:text="${menu.deskripsiMenu}"></td>
-            <td th:if="${menu.isAvailable == false}" th:text="'YA'"></td>
-            <td th:if="${menu.isAvailable == true}" th:text="'TIDAK'"></td>
-          </tr>
-          </tbody>
-        </table>
+        <p th:text="'Nomor Menu : ' + ${menu.noMenu}"></p>
+        <p th:text="'Nama Menu : ' + ${menu.namaMenu}"></p>
+        <p th:text="'Deskripsi Menu : ' + ${menu.deskripsiMenu}"></p>
+        <p th:if="${menu.isAvailable == true}" th:text="'Sedang Tersedia : YA'"></p>
+        <p th:if="${menu.isAvailable == false}" th:text="'Sedang Tersedia : TIDAK'"></p>
         <br>
       </div>
     </div>
@@ -49,4 +30,5 @@
 </div>
 
 </body>
+
 </html>

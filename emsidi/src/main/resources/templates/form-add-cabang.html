@@ -4,8 +4,6 @@
     <title>Emsidi</title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-</head>
-
 <body>
 <nav th:replace="fragments/fragment :: navbar('Cabang')"></nav>
 <div class="container">
@@ -16,47 +14,52 @@
                 <br>
                 <form th:action="@{/cabang/add}" th:object="${cabang}" method="POST">
                     Nama Cabang : <br>
-                    <input class="form-control" type="text" name="namaCabang"/>
+                    <input required class="form-control" th:field="*{namaCabang}" type="text" name="namaCabang"/>
                     <br><br>
 
                     Alamat : <br>
-                    <input class="form-control" type="text" name="alamatCabang"/>
+                    <input required class="form-control" th:field="*{alamatCabang}" type="text" name="alamatCabang"/>
                     <br><br>
 
                     Nomor Telepon : <br>
-                    <input class="form-control" type="text" name="noTeleponCabang"/>
+                    <input required class="form-control" th:field="*{noTeleponCabang}" type="text" name="noTeleponCabang"/>
                     <br><br>
 
                     Waktu Buka : <br>
-                    <input class="form-control" type="time" name="waktuBuka" />
+                    <input required class="form-control" th:field="*{waktuBuka}" type="time" name="waktuBuka" />
                     <br><br>
 
                     Waktu Tutup : <br>
-                    <input class="form-control" type="time" name="waktuTutup" />
-                    <br><br><br>
-
-
-                    <b id="menuawkowakok">Nama Menu</b>
-                    <input type="submit" name="tambahMenu" value="Tambah Row" class="btn btn-primary">
-                    <hr>
-
-                    <div th:each="row : *{listMenu}">
-                        <select th:field="*{listMenu}" th:value="${row.noMenu}" class="form-control">
-                            <option th:each="menu : ${listMenu}"
-                                    th:value="${menu.noMenu}"
-                                    th:text="${menu.namaMenu}"
-                            >
-                            </option>
-                        </select>
-                        <input type="submit" name="hapusMenu" value="Hapus" class="btn-sm btn-danger">
-                    </div>
-
+                    <input required class="form-control" th:field="*{waktuTutup}" type="time" name="waktuTutup" />
                     <br><br>
 
-                    <button class="btn btn-primary" type="submit">Submit</button>
+                    <table class="table">
+                        <thead>
+                        <th>Nama Menu</th>
+                        <th>
+                            <button class="btn btn-primary" type="submit" name="addRow">Tambah Row</button>
+                        </th>
+                        </thead>
+                        <tbody>
+                        <tr th:each="menu, iterationStatus : *{listMenu}">
+                            <td>
+                                <select name="noMenu" th:field="*{listMenu[__${iterationStatus.index}__].noMenu}"
+                                        class="form-control">
+                                    <div th:each="menuEx, iterationStatus2 : ${listMenuExisting}">
+                                        <option th:value="${menuEx.noMenu}" th:text="${menuEx.namaMenu}"></option>
+                                    </div>
+                                </select>
+                            </td>
+                            <td>
+                                <button th:value="${iterationStatus.index}" class="btn btn-danger" type="submit"
+                                        name="deleteRow">Hapus</button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <button class="btn btn-primary" type="submit" name="save">Submit</button>
                     <a class="btn btn-primary" href="/">Cancel</a>
-
-
                 </form>
             </div>
         </div>

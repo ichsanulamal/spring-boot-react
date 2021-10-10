@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-
 <head>
-    <title>Emsidi</title>
+    <meta charset="UTF-8">
+    <title> Delete Pegawai </title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
-
 <body>
-<nav th:replace="fragments/fragment :: navbar('Home')"></nav>
+<nav th:replace="fragments/fragment :: navbar('')"></nav>
 <div class="container">
     <div class="card m-4 p-4">
         <div class="card-body">
             <div class="justify-content-center">
                 <br>
                 <h2
-                        th:text="'Pegawai berhasil dihapus'">
+                        th:text="'Pegawai terkait telah berhasil dihapus'">
                 </h2>
                 <a class="btn btn-primary" th:href="@{/cabang/view(noCabang=${noCabang})}">Kembali</a>
 
             </div>
         </div>
     </div>
-
 </div>
-
 </body>
-
 </html>

@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 @Controller
 public class PegawaiController {
@@ -94,9 +95,9 @@ public class PegawaiController {
     public String deletePegawaiSubmit(
             @ModelAttribute CabangModel cabang,
             Model model
-    ) {
+    ){
         LocalTime now = LocalTime.now();
-        if (now.isBefore(cabang.getWaktuBuka()) || now.isAfter(cabang.getWaktuTutup())) {
+        if (now.isBefore(cabang.getWaktuBuka()) || now.isAfter(cabang.getWaktuTutup())){
             for (PegawaiModel pegawai: cabang.getListPegawai()) {
                 pegawaiService.removePegawai(pegawai);
             }
