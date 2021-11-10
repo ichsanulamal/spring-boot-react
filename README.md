@@ -6,6 +6,22 @@
 
 ---
 
+## Tutorial 5
+
+1. **Apa itu Postman? Apa kegunaannya?** Postman adalah aplikasi atau development tool API yang digunakan untuk melakukan build, test, dan modify API. Postman berfungsi sebagai REST Client dimana dapat digunakan untuk uji REST API. Dengan Postman, kita sebagai developer dapat mendokumentasikan, tes, mendesain, debug, menerbitkan, dan memonitor API pada satu tempat. Developer tidak harus menulis HTTP client network code, tetapi membuat test suites yang dinamakan "Collections" ketika menggunakan Postman untuk melakukan testing. Postman akan berinteraksi dengan API secara otomatis.
+
+2. **Jelaskan fungsi dari anotasi @JsonIgnoreProperties dan @JsonProperty.**
+
+- @JsonIgnoreProperties berfungsi untuk memberikan perintah pada class untuk mengabaikan properti logis yang ditentukan dalam serialisasi dan deserialisasi JSON. Sebagai contoh, ketika kita memberikan true untuk element ignoreUnknown, maka field JSON akan diabaikan jika data JSON memiliki field yang tidak mempunyai properti logis.
+- @JsonProperty merupakan anotasi yang memiliki fungsi untuk mengubah nama variabel. @JsonProperty memberitahu Jackson ObjectMapper untuk memetakan nama property JSON ke nama field Java yang diberikan anotasi.
+
+3. **Apa kegunaan atribut WebClient?** WebClient yang digunakan pada RestServiceImpl merupakan sebuah interface yang disediakan oleh Spring Framework yang merupakan bagian dari reactive client. WebClient memiliki fungsi sebagai poin akses utama dari web / HTTP requests. Selain itu, WebClient juga berfungsi untuk menginstansiasi sebuah akses poin URL serta mengelola request dan response atas URL tersebut.
+
+4. **Apa itu ResponseEntity dan BindingResult? Apa kegunaannya?**
+
+- ResponseEntity merupakan salah satu class yang terdapat di java dan mewakili respons HTTP, termasuk header, body, dan status. Seperti @ResponseBody yang menempatkan return value ke body dari response, ResponseEntity juga memungkinkan kita untuk dapat menambahkan header dan kode status.
+- BindingResult merupakan objek Spring yang menyimpan hasil dari validasi, binding, dan error atas model objek yang divalidasikan. BindingResult berisikan informasi mengenai kesalahan, seperti field yang diperlukan, adanya ketidakcocokan jenis atau kesalahan dalam melakukan pemanggilan method. BindingReslut digunakan dengan cara diletakkan setelah parameter objek validasi.
+
 ## Tutorial 4
 
 1. Jelaskan perbedaan th:include dan th:replace! 
