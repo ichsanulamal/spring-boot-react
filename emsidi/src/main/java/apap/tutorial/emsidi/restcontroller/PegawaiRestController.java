@@ -83,6 +83,16 @@ public class PegawaiRestController {
         }
     }
 
+    @DeleteMapping(value = "/pegawai/delete/all")
+    private ResponseEntity deleteAllPegawai() {
+        List<PegawaiModel> listPegawai = pegawaiRestService.retrieveListPegawai();
+        for (PegawaiModel pm:listPegawai) {
+            System.out.println(pm.getNoPegawai());
+            pegawaiRestService.deletePegawai(pm.getNoPegawai());
+        }
+        return ResponseEntity.ok("All pegawai deleted");
+    }
+
 //        PegawaiModel thisPegawai = pegawaiRestService.getPegawaiByNoPegawai(noPegawai);
 //        try {
 //            URL url = new URL("https://api.agify.io/?name=" + thisPegawai.getNamaPegawai());
