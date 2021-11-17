@@ -11,9 +11,19 @@
 1. **Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?**
 
 - Otentikasi merupakan proses untuk melakukan verifikasi apakah pengguna yang ingin login dengan username tersebut telah terdaftar di database dan berhak untuk masuk dan mengakses aplikasi. Biasanya melibatkan username dan password, tetapi dapat menyertakan metode lain yang dapat menunjukkan identitas seperti sidik jari.
+
 - Berikut merupakan contoh implementasi otentifikasi pada class `WebSecurityConfig`: @Autowired public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{auth.userDetailsService(userDetailsService).passwordEncode(encoder());}
+
 - Otorisasi merupakan proses untuk menentukan hak pengguna apakah pengguna memiliki akses ke halaman tertentu yang telah diotentifikasi dan menentukan apakah orang yang sudah diidentifikasi (diotentikasi), diperbolehkan untuk memanipulasi sumber daya tertentu. Biasanya ditentukan dengan mencari apakah orang itu memiliki akses ke sumber daya tertentu.
-- Berikut merupakan contoh implementasi otorisasi pada class `WebSecurityConfig`: authorizeRequests() .antMatchers("/css/**").permitAll() .antMatchers("/js/**").permitAll() .antMatchers("/resep/**").hasAnyAuthority("APOTEKER","ADMIN")
+
+- Berikut merupakan contoh implementasi otorisasi pada class 
+
+  ```java
+  .authorizeRequests()
+                  .antMatchers("/css/**").permitAll()
+                  .antMatchers("/js/**").permitAll()
+                  .antMatchers("/user/viewall/**").hasAnyAuthority("Admin")
+  ```
 
 2. **Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerjanya!**
 

@@ -9,11 +9,12 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-import javax.persistence.SecondaryTable;
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserDb userDb;
@@ -21,10 +22,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserModel user = userDb.findByUsername(username);
-        System.out.println("jancuk " + user.getUsername());
-        Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
-        return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
+        Set<GrantedAuthority> grantedAuthorites = new HashSet<GrantedAuthority>();
+        grantedAuthorites.add(new SimpleGrantedAuthority(user.getRole().getRole()));
+        return new User(user.getUsername(), user.getPassword(),grantedAuthorites);
     }
-
 }

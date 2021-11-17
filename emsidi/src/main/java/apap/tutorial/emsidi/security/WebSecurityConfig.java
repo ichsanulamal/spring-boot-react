@@ -21,6 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/js/**").permitAll()
+                .antMatchers("/user/viewall/**").hasAnyAuthority("Admin")
+                .antMatchers("/user/add/**").hasAnyAuthority("Admin")
+                .antMatchers("/menu/add/**").hasAnyAuthority("Manajer")
+
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -48,7 +52,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        System.out.println("jancuk ");
         auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
     }
 }
