@@ -39,7 +39,7 @@ function CustomIconButton({ isShopList, inCart, handleChange }) {
         }
         return (
             <IconButton onClick={handleChange}>
-                <addShoppingCartIcon />
+                <AddShoppingCartIcon />
             </IconButton>);
         } else {
             return (

@@ -23,26 +23,58 @@ function App() {
     const [cartItems, setCartItems] = useState(() => []);
     const [cartHidden, setCartHidden] = useState(true);
     const [balance, setBalance] = useState(120);
-    function updateShopItem(item, inCart){
-        const tempShopItems = [...shopItems];
-        const targetInd = tempShopItems.findIndex((it) => it.id === item.id);
-        tempShopItems[targetInd].inCart = inCart;
-        setShopItems(tempShopItems);
-    }
-    function handleToggle(){
-        setCartHidden(!cartHidden);
-    }
+
     function handleAddItemToCart(item){
         const newItems = [...cartItems];
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
         if (targetInd < 0) {
+            const balanceAfter = balance - item.price;
+            if (balanceAfter < 0) {
+                alert("Balance not sufficient!");
+                return;
+            }
+            setBalance(balanceAfter);
+
             newItem.inCart = true;
             newItems.push(newItem);
             updateShopItem(newItem, true)
         }
         setCartItems(newItems);
     }
+
+    function updateShopItem(item, inCart){
+        const tempShopItems = [...shopItems];
+        const targetInd = tempShopItems.findIndex((it) => it.id === item.id);
+        tempShopItems[targetInd].inCart = inCart;
+        setShopItems(tempShopItems);
+    }
+
+    function handleToggle(){
+        setCartHidden(!cartHidden);
+    }
+
+    function handleRemoveItemFromCart(item) {
+        const newItems = [...cartItems];
+        const newItem = { ...item };
+        const targetInd = newItems.findIndex((it) => it.id === newItem.id);
+        if (targetInd >= 0 ) {
+            setBalance(balance + item.price);
+
+            newItems.splice(targetInd, 1);
+            updateShopItem2(newItem, false);
+        }
+        setCartItems(newItems);
+    };
+
+    function updateShopItem2(item, inCart) {
+        const tempShopItems = [...shopItems];
+        const targetInd = tempShopItems.findIndex((it) => it.id === item.id);
+        tempShopItems[targetInd].inCart = inCart;
+        setShopItems(tempShopItems);
+    }
+
+
     return (
         <div className="container-fluid">
             <h1 className="text-center mt-3 mb-0">Mini Commerce</h1>
@@ -67,7 +99,7 @@ function App() {
                             <List
                                 title="My Cart"
                                 items={cartItems}
-                                onItemClick={() => {}}
+                                onItemClick={handleRemoveItemFromCart}
                             ></List>
                         </div>
                     ) : <div className="col-sm">

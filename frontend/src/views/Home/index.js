@@ -44,7 +44,7 @@ export default class Home extends React.Component {
                             <List
                                 title="My Cart"
                                 items={this.state.cartItems}
-                                onItemClick={() => {}}
+                                onItemClick={this.handleRemoveItemFromCart}
                                 ></List>
                         </div>
                     ) : <div className="col-sm">
@@ -66,6 +66,13 @@ export default class Home extends React.Component {
         const newItem = { ...item };
         const targetInd = newItems.findIndex((it) => it.id === newItem.id);
         if (targetInd < 0 ) {
+            const balanceAfter = this.state.balance - item.price;
+            if (balanceAfter < 0) {
+                alert("Balance not sufficient!");
+                return;
+            }
+            this.setState({balance: balanceAfter })
+
             newItem.inCart = true;
             newItems.push(newItem);
             this.updateShopItem(newItem, true)
@@ -83,5 +90,25 @@ export default class Home extends React.Component {
     handleToggle = () => {
         const cartHidden = this.state.cartHidden;
         this.setState({cartHidden: !cartHidden});
+    }
+
+    handleRemoveItemFromCart = (item) => {
+        const newItems = [...this.state.cartItems];
+        const newItem = { ...item };
+        const targetInd = newItems.findIndex((it) => it.id === newItem.id);
+        if (targetInd >= 0 ) {
+            this.setState({balance: this.state.balance + item.price })
+
+            newItems.splice(targetInd, 1);
+            this.updateShopItem2(newItem, false);
+        }
+        this.setState({ cartItems: newItems});
+    };
+
+    updateShopItem2 = (item, inCart) => {
+        const tempShopItems = this.state.shopItems;
+        const targetInd = tempShopItems.findIndex((it) => it.id === item.id);
+        tempShopItems[targetInd].inCart = inCart;
+        this.setState({ shopItems: tempShopItems});
     }
 }
