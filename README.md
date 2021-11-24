@@ -6,6 +6,44 @@
 
 ---
 
+## Tutorial 6
+
+1. **Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?**
+
+- Otentikasi merupakan proses untuk melakukan verifikasi apakah pengguna yang ingin login dengan username tersebut telah terdaftar di database dan berhak untuk masuk dan mengakses aplikasi. Biasanya melibatkan username dan password, tetapi dapat menyertakan metode lain yang dapat menunjukkan identitas seperti sidik jari.
+
+- Berikut merupakan contoh implementasi otentifikasi pada class `WebSecurityConfig`: @Autowired public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception{auth.userDetailsService(userDetailsService).passwordEncode(encoder());}
+
+- Otorisasi merupakan proses untuk menentukan hak pengguna apakah pengguna memiliki akses ke halaman tertentu yang telah diotentifikasi dan menentukan apakah orang yang sudah diidentifikasi (diotentikasi), diperbolehkan untuk memanipulasi sumber daya tertentu. Biasanya ditentukan dengan mencari apakah orang itu memiliki akses ke sumber daya tertentu.
+
+- Berikut merupakan contoh implementasi otorisasi pada class 
+
+  ```java
+  .authorizeRequests()
+                  .antMatchers("/css/**").permitAll()
+                  .antMatchers("/js/**").permitAll()
+                  .antMatchers("/user/viewall/**").hasAnyAuthority("Admin")
+  ```
+
+2. **Apa itu BCryptPasswordEncoder? Jelaskan secara singkat cara kerjanya!**
+
+- BCryptPasswordEncoder merupakan salah satu fungsi password hashing. BCryptPasswordEncoder bertugas untuk melakukan enkripsi password user sebelum disimpan ke database. BCryptPasswordEncoder juga bertugas untuk melakukan encrypt terhadap password pada saat user ingin melakukan login. Cara kerjanya adalah saat membuat user baru dengan membuat username dan password baru, password akan dienkripsi menggunakan fungsi BCrypt sehingga password yang terlihat pada database adalah password yang sudah dienkripsi.
+
+3. **Apakah penyimpanan password sebaiknya menggunakan encryption atau hashing? Mengapa demikian?**
+
+- Hashing dan enkripsi keduanya menyediakan cara untuk menjaga keamanan data sensitif. Namun, penyimpanan password perlu dihash. Enkripsi adalah fungsi dua arah, artinya plaintext asli dapat diambil kembali. Enkripsi sesuai untuk menyimpan data seperti alamat pengguna karena data ini ditampilkan dalam teks biasa pada profil pengguna. Sedangkan Hashing adalah fungsi satu arah (yaitu, tidak mungkin untuk "mendekripsi" hash dan mendapatkan nilai aslinya) sehingga Hashing sesuai untuk validasi password.
+
+
+4. **Jelaskan secara singkat apa itu UUID beserta penggunaannya!**
+
+- UUID (Universally Unique Identifier) merupakan kode identifikasi unik yang diberikan oleh sistem secara acak dengan algoritma tertentu. UUID digunakan untuk memungkinkan sistem men-generate id pengguna secara unik dengan hashing sebanyak 32 karakter secara acak yang bertujuan untuk meningkatkan keamanan data pengguna sehingga id pengguna aman dan tidak mudah untuk diretas. Mirip seperti BCrypt, bedanya kali ini adalah ID, bukan password. Saat kita membuat user baru, sistem akan otomatis melakukan pemberian kode unik yang akan terlihat pada database dengan tipe UUID.
+
+5. **Apa kegunaan class UserDetailsServiceImpl.java? Mengapa harus ada class tersebut ?**
+
+- Class UserDetailsServiceImpl.java mengimplementasi interface UserDetailService yang sudah disediakan oleh spring security. Class tersebut berguna untuk mengambil informasi otentikasi dan otorisasi pengguna. Tujuannya agar Spring Boot Security dapat melakukan otorisasi terhadap pengguna yang melakukan login sesuai dengan rolenya yang sudah terdaftar di database. Class ini harus ada karena class UserServiceImpl dan RoleServiceImpl tidak dapat memberikan informasi kepada Spring boot mengenai otentikasi dan otorisasi dari akun-akun yang ada pada database sistem.
+
+
+
 ## Tutorial 5
 
 1. **Apa itu Postman? Apa kegunaannya?** Postman adalah aplikasi atau development tool API yang digunakan untuk melakukan build, test, dan modify API. Postman berfungsi sebagai REST Client dimana dapat digunakan untuk uji REST API. Dengan Postman, kita sebagai developer dapat mendokumentasikan, tes, mendesain, debug, menerbitkan, dan memonitor API pada satu tempat. Developer tidak harus menulis HTTP client network code, tetapi membuat test suites yang dinamakan "Collections" ketika menggunakan Postman untuk melakukan testing. Postman akan berinteraksi dengan API secara otomatis.

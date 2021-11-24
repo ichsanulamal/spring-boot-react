@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <title>Emsidi</title>
@@ -13,15 +13,32 @@
 <nav th:replace="fragments/fragment :: navbar('Home')"></nav>
 <div class="d-flex justify-content-center">
     <div class="m-4">
+        <div class="d-flex justify-content-center">
+            <h2 th:text="'Hello ' + ${#httpServletRequest.remoteUser} + '!'">
+            Login as</h2>
+        </div>
         <h2>Selamat datang di Emsidi</h2>
+        <section>
+            <br>
+            <h2 th:text="${notif}"></h2>
+            <br>
+        </section>
         <div class="d-flex justify-content-center">
             <a th:href="@{/cabang/viewall}" class="mx-2 btn btn-danger">Lihat semua cabang</a>
             <a th:href="@{/cabang/add}" class="mx-2 btn btn-outline-danger">Tambah cabang</a>
         </div>
         <div class=" my-3 d-flex justify-content-center">
             <a th:href="@{/menu/viewall}" class="mx-2 btn btn-danger">Lihat semua menu</a>
-            <a th:href="@{/menu/add}" class="mx-2 btn btn-outline-danger">Tambah menu</a>
+            <a sec:authorize ="hasRole('Manajer')" th:href="@{/menu/add}" class="mx-2 btn btn-outline-danger">Tambah menu</a>
         </div>
+        <div class=" my-3 d-flex justify-content-center">
+            <a th:href="@{/user/viewall}" class="mx-2 btn btn-danger">Lihat semua user</a>
+        </div>
+        <div class=" my-3 d-flex justify-content-center">
+            <a th:href="@{/user/update-password}" class="mx-2 btn btn-danger">Ubah password</a>
+        </div>
+
+
     </div>
 </div>
 
