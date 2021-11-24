@@ -6,6 +6,74 @@
 
 ---
 
+## **Tutorial 7**
+
+**1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan**
+
+- Pada latihan **pertama**, saya menambahkan validasi pada komponen Item, dimana sebelumnya, jika salah satu item dari movie list ditekan, maka state item akan menjadi checked. Oleh karena itu saya menambahkan validasi berikut pada tag input:
+
+```https://drive.google.com/file/d/1whMbMJ3GqDGw33eTCETI8lucjhrAdT0r/view?usp=sharing```
+
+
+- Pada latihan **kedua**, saya membuat button yang dapat menghapus semua item yang ada pada list favItems. Untuk membuatnya, yang pertama saya lakukan adalah membuat function yang dapat mengubah state favItems menjadi list kosong. Berikut adalah functionnya:
+
+```https://drive.google.com/file/d/1Sx0_AW0k4LUIaP9eD3lk-5g-CVVlSx4H/view?usp=sharing```
+
+lalu setelah membuat function tersebut, saya membuat div yang memuat validasi bahwa button hanya ditampilkan jika terdapat item pada favItems beserta tag button yang dapat memanggil function clearFavItem setiap kali button di click. Berikut adalah div dan buttonnya:
+
+```https://drive.google.com/file/d/1n0S7jd9ibr6jTWj8t_O26c8vbPwH4lW5/view?usp=sharing```
+
+- Pada latihan **ketiga**, saya membuat function baru bernama handle handleFavItemClick yang akan digunakan untuk menghandle item yang khusus terletak pada list favItems dan saya juga menghilangkan bagian kode fungsi handleItemClick yang dapat memanggil fungsi .splice() untu menghapus item dari list favItems. Berikut adalah potongan kode kedua fungsi:
+
+```https://drive.google.com/file/d/1KTDh-jWi_Yln57DFzQRPhnOnWLvXrSGz/view?usp=sharing```
+
+- Pada latihan **keempat**, saya menambahkan sebuah switch dimana setiap switch nyala, maka bagian list favItems akan ditampilkan. Untuk mencapainya saya menambahkan validasi pada tag div yang memuat list favItems, membuat function yang dapat merubah state dari textDisplay (state yang menentukan jika list favItems ditunjukkan atau tidak), dan membuat switch dengan action yang dapat memanggil fungsi yang telah dibuat. Berikut adalah potongan kode untuk fungsi yang dibuat:
+
+```https://drive.google.com/file/d/1Q9mRK903IFCruVFyoKgNnLsGeixCrNUL/view?usp=sharing```
+
+Berikut adalah potongan kode untuk switch yang dibuat:
+
+```https://drive.google.com/file/d/1uyiIUuH9BLGaahGJ6qg3gONQttw98czn/view?usp=sharing```
+
+Dan berikut adalah potongan kode untuk validasi div yang ditunjukkan atau di hide:
+
+```https://drive.google.com/file/d/1tH_B420cwI_tHMid6C5ie4OG6TpcdRl0/view?usp=sharing```
+
+- Terakhir, untuk latihan **kelima**, saya membuat komponen baru pada folder components yang dinamakan EmptyState. Lalu, pada komponen tersebut, saya membuat file index.js dengan isi berikut:
+
+```https://drive.google.com/file/d/1WuQRxalRjq8yKQFO9W75Ic_GD5v7oYjn/view?usp=sharing```
+
+Lalu, saya memanggil EmptyState tersebut pada komponen List sehingga jika komponen list belum memiliki items, yang akan dirender oleh program adalah komponen state. Berikut adalah potongan kodenya:
+
+```https://drive.google.com/file/d/1ezFAnZFNldT_0n8cjkxcrzs0j3OrDQ4i/view?usp=sharing```
+
+**2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?**
+
+- Props merupakan singkatan dari property yang setara dengan argumen pada sebuah function di bahasa pemrograman seperti java atau python. Pada tutorial ini, contoh dari props adalah item pada function handleFavItemClick = (item). Pada umumnya, props digunakan untuk melakukan komunikasi data antar component dari parent component ke child component.
+
+- Sedangkan state adalah data private yang dimiliki component yang terus berubah sesuai dengan perilaku program. Contoh state pada tutorial ini dapat dilihat pada favItems, dimana favItems akan berubah sesuai dengan penambahan dan pengurangan props item yang di klik pada list favItems. State digunakan untuk komunikasi data internal. Component yang dapat memiliki state yaitu hanya class component saja. 
+
+
+**3. Apa keuntungan menggunakan component (e.g. List, Item) di React? Berikan contohnya!**
+
+- Keuntungan menggunakan component pada react adalah sifat re-usable yang dimilikinya. Setiap component,seperti pada tutorial yaitu Item dan List memiliki logika sendiri dan mengontrol proses renderingnya sendiri. Jika kita menggunakan fitur komponen, kita dapat menggunakan kode yang terdapat didalamnya kapan saja dan dimana saja dan dapat membantu kita dalam membuat aplikasi yang konsisten.
+
+**4. Menurut kamu, apa saja kelebihan menggunakan React dalam pengembangan web?**
+Menurut saya dalam mengembangkan sebuah web, react dapat memberikan banyak keuntungan, yang diantaranya adalah:
+
+- Penggunaan React mudah untuk dipelajari dan implementasikan terlebih jika sudah memahami programming
+- Membuat aplikasi web dinamis menjadi lebih mudah 
+- Proses rendering yang lebih cepat karena terdapat virtual DOM
+- Banyak digunakan oleh perusahaan 
+- Terdapat developer toolset yang sangat membantu seperti React Dev Tools pada Google Chrome, dan lainnya
+
+**5. Menurut kamu, apa saja kekurangan menggunakan React dalam pengembangan web?**
+Kekurangan yang saya rasakan dari react diantaranya adalah:
+
+- Ukuran library yang besar 
+- Sulitnya memahami flow dan juga bahasa pemrograman yang digunakan pada react jika belum pernah memiliki pengalaman programming sebelumnya sehingga butuh pelatihan yang cukup intensif
+- Hanya mencakup lapisan UI aplikasi dan tidak ada yang lain (frontend)
+
 ## Tutorial 6
 
 1. **Jelaskan secara singkat perbedaan Otentikasi dan Otorisasi! Di bagian mana (dalam kode yang telah anda buat) konsep tersebut diimplementasi?**
