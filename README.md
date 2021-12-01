@@ -2,9 +2,45 @@
 ## Authors
 * **Muhammad Ichsanul Amal** - *1906353454* - *A*
 
-
-
 ---
+
+## **Tutorial 7**
+
+**1. Jelaskan apa yang Anda lakukan di latihan dalam satu paragraf per-soal. Berikan screenshot sebagai ilustrasi dari apa yang Anda jelaskan**
+
+- Pertama tambahkan fungsi untuk menghandle click.
+
+![](extras/t71.png)
+
+- Selanjutnya carilah index item pada cartItems. Apabila index ditemukan, maka state dari balance ditambahkan dengan price dari item yang dipilih. Gunakan fungsi slice untuk menghapus item dari array berdasarkan index item yang sudah didapat. Kemudian, update state dari cartItems. Update state juga dari shopItems agar tombol add to cart muncul kembali.
+
+![](extras/t72.png)
+
+![](extras/t73.png)
+
+**2. Menurut pemahaman kamu selama pengerjaan tutorial ini, apa perbedaan antara state dan props?**
+
+- Props merupakan singkatan dari property yang setara dengan argumen pada sebuah function di bahasa pemrograman seperti java atau python. Pada umumnya, props digunakan untuk melakukan komunikasi data antar component dari parent component ke child component.
+
+- Sedangkan state adalah data private yang dimiliki component yang terus berubah sesuai dengan perilaku program atau bersifat dinamis. State digunakan untuk komunikasi data internal atau manipulasi object saat itu juga.
+
+**3. Menurut kamu, apakah sebaiknya kita menggunakan component (e.g. List, Item) dalam React? sebutkan alasannya.**
+
+- Ya, karena React memang dedesain seperti itu agar kita menggunakan component sehingga dapat di reuse. Setiap component,seperti pada tutorial yaitu Item dan List memiliki logika sendiri dan mengontrol proses renderingnya sendiri. Jika kita menggunakan fitur komponen, kita dapat menggunakan kode yang terdapat didalamnya kapan saja dan dimana saja dan dapat membantu kita dalam membuat aplikasi yang konsisten.
+
+**4. Apa perbedaan class component dan functional component?**
+
+- Functional components lebih ringkas struktur kodenya. Namun, Functional component hanya bisa menggunakan `props` itu sebabnya function component disebut ***stateless component*** atau biasa digunakan juga sebagai ***UI Component*** (komponen yang menangani tampilan). Sedangkan Class component dapat menggunakan `state` dan `props`.
+
+**5. Dalam react, apakah perbedaan component dan element?**
+
+- Elemen adalah blok bangunan terkecil di React, yang menggambarkan apa yang akan dilihat oleh user di layar mereka. Secara sederhana, elemen dapat didefinisikan sebagai representasi virtual dari DOM. Sedangkan Komponen pada React menerima input yang disebut *props* dan me-*return React Element* yang menggambarkan apa yang akan ditampilkan di layar. Komponen memungkinkan kita untuk membuat UI yang *independent, isolated,* dan *reusable* sehingga mengurangi repetisi kode. Secara kasar, element dapat merupakan instance dari component yang telah dibuat.
+
+Bonus jawaban, Kelebihan dan Kekurangan React:
+
+- Mudah untuk dipelajari dan implementasikan terlebih jika sudah memahami programming, dapat menjadikan pembuatan aplikasi web dinamis menjadi lebih mudah, proses rendering yang lebih cepat karena terdapat virtual DOM, populer atau banyak digunakan oleh perusahaan, terdapat developer toolset yang sangat membantu seperti React Dev Tools pada browser, dan lainnya.
+
+- Ukuran library yang besar, sulitnya memahami flow dan juga bahasa pemrograman yang digunakan pada react jika belum pernah memiliki pengalaman programming sebelumnya sehingga butuh pelatihan yang cukup intensif, hanya mencakup lapisan UI aplikasi dan tidak ada yang lain (frontend), dan menurut saya javascript tidak type-safe sehingga terkadang tipe data dari objeknya membingungkan, dan hanya bisa dilihat dari namanya dan tes secara manual saja.
 
 ## Tutorial 6
 
