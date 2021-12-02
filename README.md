@@ -1,8 +1,66 @@
-# Tutorial APAP
+Tutorial APAP
+
 ## Authors
 * **Muhammad Ichsanul Amal** - *1906353454* - *A*
 
 ---
+
+## Tutorial 8
+
+**1. Ceritakan langkah - langkah yang kalian lakukan untuk solve LATIHAN no.1, dan mengapa kalian melakukan langkah - langkah tersebut?**
+
+Pada saat saya mengerjakan, setelah form diisi, modal akan otomatis tercancel dan setelah dibuka kembali form isian sudah secara otomatis seperti belum diisi. Alasannya adalah karena baris berikut dimana state dari formnya dijadikan kosong, dan langsung dilakukan pemanggilan fungsi handleCancel. Dengan demikian, untuk menghandle untuk fungsi edit item juga, baris pada 78 hanya perlu dipindahkan ke fungsi handleCancel;
+
+![](extras/t81.png)
+
+**2. Jelaskan fungsi dari async dan await!**
+
+- **async** digunakan untuk mengubah function menjadi asynchronous, yang merupakan salah satu cara untuk mengatasai masalah asynchronous pada Javascript. Async berfungsi untuk secara otomatis mengembalikan sebuah return value berupa objek dengan bentuk/tipe Promise, atau ditolak dengan uncaught errors dan dapat menggunakan keyword await.
+
+- Sementara **await** berfungsi untuk memberi tahu program untuk keluar secara sementara dari fungsi async dan melanjutkan programnya ketika tugas yang diberikan telah selesai. Hal ini berarti baris berikutnya belum dieksekusi sebelum baris yang menggunakan await telah selesai dieksekusi. Fungsi await hanya dapat digunakan pada fungsi yang menggunakan async. 
+
+**3. Masukkan jawaban dari Screenshot yang diperintahkan di halaman 7 pada Component Lifecycle pada pertanyaan ini.**
+
+Saya tidak sempat screenshoot pada saat mengerjakan, sehingga saya hanya comment dan uncomment dari hal yang telah saya lakukan. Berikut SS nya, tidak ada shouldComponentUpdate sebelum dilakukan apa-apa.
+
+![](extras/t831.png)
+
+Berikut setelah dilakukan bind, dan button add item diklik, serta tidak ditambahkan return value pada shouldComponentUpdate.
+
+![](extras/t832.png)
+
+Berikut setelah ditambahkan return value dan dilakukan event pada beberapa komponen yang mengubah property atau state.
+
+![](extras/t833.png)
+
+
+
+**4. Jelaskan fungsi dari componentDidMount, shouldComponentUpdate, componentDidUpdate, componentWillReceiveProps, componentWillUnmount. Notes : Penjelasan harus mencantumkan “kapan fungsi dipanggil” dan “use case apa saja yang biasanya menggunakan lifecycle method tersebut”.**
+
+**componentDidMount:**
+
+- merupakan salah satu component Lifecycle yang biasanya digunakan untuk melakukan pengambilan data dan menandakan tahap akhir dari mounting lifecycle, fungsi ini dipanggil setelah HTML yang dirender telah selesai melakukan loading. Fungsi ini dapat digunakan saat React ingin mengambil data dari aplikasi eksternal seperti API dari website lain atau framework JavaScript. Setelah itu kita dapat menggunakan method setState() untuk memperbarui data yang didapat dan melakukan rendering dengan data yang baru.
+- Use case: Mengambil data (API) dari website lain untuk kemudian dirender.
+
+**shouldComponentUpdate:**
+
+- Merupakan salah satu component Lifecycle yang biasanya digunakan untuk menentukan apakah perubahan yang terjadi di component akan ditampilkan atau tidak. Seperti memberitahu React jika output dari komponen tidak terpengaruh oleh perubahan saat ini di dalam state dan props. Dengan kata lain, fungsi ini memberi tahu bahwa apakah komponen harus diperbarui atau tidak, dengan return value berupa boolean true yang berarti program akan merender ulang component yang telah diubah yang secara otomatis akan terupdate atau false untuk component yang tidak merender ulang dalam arti tidak ada component yang diubah dan dengan menerima parameter nextProps dan nextState. Fungsi ini akan dijalankan setelah props atau state dari component tersebut mengalami perubahan tetapi sebelum proses rendering dimulai.
+- Use case: Ingin mengubah komponen dan melakukan rendering kembali pada setiap state yang berubah.
+
+**componentDidUpdate:**
+
+- merupakan salah satu component Lifecycle yang biasanya digunakan pada saat melakukan interaksi dengan environment non-React seperti browser atau API. Fungsi ini akan dijalankan Saat suatu instance di dalam suatu komponen melakukan update dan ketika HTML yang dirender telah selesai melakukan loading.
+- Use case: Melakukan update pada komponen 
+
+**componentWillReceiveProps:**
+
+- merupakan salah satu component Lifecylce yang memungkinkan perubahan state berdasar pada props yang sekarang dan props baru, dengan begitu kita dapat mengetahui apakah terdapat perubahan pada props atau tidak, tanpa melakukan render kembali. Dengan kata lain, fungsi tersebut dapat memberi tahu React bahwa akan ada perubahan pada komponen yang memiliki props. Fungsi ini akan dijalankan ketika terjadi perubahan pada props sebelum component di render. Method ini hanya akan dipanggil saat komponen akan menerima props.
+- Use case: Melakukan reset state. 
+
+**componentWillUnmount:**
+
+- merupakan salah satu component Lifecycle yang berguna ketika ada action yang berhubungan dengan cleanup diperlukan seperti melakukan pembersihan timer yang tidak valid, membatalkan permintaan jaringan, atau membersihkan langganan apa pun yang dibuat di componentDidMount. Oleh karena itu, fungsi ini akan dijalankan ketika ada component yang telah dihapus dari DOM, misalnya ketika DOM dirender ulang tanpa komponen atau pengguna berganti website atau menutup browsernya. 
+- Use case: Menghapus interval waktu fungsi berjalan.
 
 ## **Tutorial 7**
 
