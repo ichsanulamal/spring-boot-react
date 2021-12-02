@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./styles.module.css";
 
 const Button = (props) => {
     const {action, children} = props;
