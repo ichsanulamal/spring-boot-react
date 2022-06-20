@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('filterPembelian')"></nav>
+
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="container text-white rounded" style="background-color: #FFB800">
+            <h2>Pilih Menu</h2>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a th:href="@{/cari/pembelian}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Cari Pembelian</a>
+            <a th:href="@{/barang/cari}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Cari Barang</a>
+            <a th:href="@{/bonus/cari/member/paling-banyak}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Bonus</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

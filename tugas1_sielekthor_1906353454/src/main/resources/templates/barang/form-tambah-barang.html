@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Barang</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('barang')"></nav>
+
+<!-- redirect condition -->
+<div th:if="${falseQty} == true">
+    <script>
+        function myFunction() {
+            alert("GAGAL MENYIMPAN: Periksa kembali isian form");
+        }
+        myFunction()
+    </script>
+</div>
+<div th:if="${falseKode} == true">
+    <script>
+        function myFunction() {
+            alert("Kode barang perlu 16 karakter dan unik");
+        }
+        myFunction()
+    </script>
+</div>
+<!-- end redirect condition -->
+
+<div class="container">
+    <div class="m-4">
+        <div class="d-flex justify-content-center">
+            <h2>Form Tambah Barang</h2>
+        </div>
+    </div>
+    <div class="card m-4 p-4" style="background-color: lightgrey">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <form th:action="@{/barang/tambah}" th:object="${barang}" method="POST">
+                    Nama Barang<br>
+                    <input required class="form-control" type="text" name="namaBarang" />
+                    <br><br>
+
+                    Kode Barang<br>
+                    <input required class="form-control" type="text" name="kodeBarang" minlength="16" maxlength="16" />
+                    <br><br>
+
+                    Merk Barang<br>
+                    <input required class="form-control" type="text" name="merkBarang" />
+                    <br><br>
+
+                    Stok Barang<br>
+                    <input required class="form-control" type="number" min="0" name="stok" />
+                    <br><br>
+
+                    Garansi Toko<br>
+                    <input required class="form-control" type="number" min="0" name="jumlahGaransi" />
+                    <br><br>
+
+                    Deskripsi<br>
+                    <input required class="form-control" type="text" name="deskripsiBarang" />
+                    <br><br>
+
+                    Tipe Barang<br>
+                    <select name="tipe" class="form-control" style="color: #FFB800;">
+                        <option th:each="tipe : ${listTipe}"
+                                th:value="${tipe.id}"
+                                th:text="${tipe.namaTipe}"
+                        >
+                    </select>
+                    <br><br>
+
+                    Harga<br>
+                    <input required class="form-control" type="number" min="1" name="hargaBarang" />
+                    <br><br>
+
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-warning btn-lg" type="submit">Simpan</button>
+                        <a style="margin: 10px;"></a>
+                        <a class="btn btn-light btn-outline-warning btn-lg" th:href="@{/barang}">Batal</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

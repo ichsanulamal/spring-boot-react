@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Barang</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('pembelian')"></nav>
+
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="d-flex justify-content-center">
+            <h2>Daftar Pembelian</h2>
+        </div>
+        <br>
+
+        <a th:href="@{/pembelian/tambah}" class="mx-2 btn btn-warning">+ Tambah Pembelian</a>
+        <table class="table table-hover table-striped" >
+            <thead style="background-color: #FFB800">
+            <tr>
+                <th>No.</th>
+                <th>No Invoice</th>
+                <th>Total Harga</th>
+                <th>Member</th>
+                <th>Jumlah Barang</th>
+                <th>Tanggal Pembelian</th>
+                <th colspan="2">Aksi</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pembelian, iterationStatus : ${listPembelian}">
+                <td th:text="${iterationStatus.count}"></td>
+                <td th:text="${pembelian.noInvoice}"></td>
+                <td th:text="'Rp' + ${#numbers.formatDecimal(pembelian.total, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                <td th:text="${pembelian.member.namaMember}"></td>
+                <td th:text="${pembelian.listPembelianBarang.size}"></td>
+                <td th:text="${#temporals.day(pembelian.tanggalPembelian)} + ' '
+                            + ${#temporals.monthNameShort(pembelian.tanggalPembelian)} + ' '
+                            + ${#temporals.year(pembelian.tanggalPembelian)}">x
+                </td>
+
+                <td>
+                    <a class="btn btn-primary" th:href="@{/pembelian/} + ${pembelian.id}">Lihat</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" th:href="@{/pembelian/hapus/} + ${pembelian.id}">Hapus</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title> Home </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar('home')"></nav>
+
+<div class="d-flex justify-content-center">
+    <div class="m-4">
+        <div class="text-white rounded" style="margin-top: 5em; background-color: #FFB800; width: 500px; height: 200px; border-radius: 50%">
+            <div class="d-flex justify-content-center">
+                <h2 class="font-weight-bold" style="margin-top: 2em">WELCOME TO SIELEKTHOR</h2>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+            <p style="color: #FFB800" class="font-weight-bold justify-content-center">List of Features:</p>
+        </div>
+        <div class="d-flex justify-content-center">
+            <a th:href="@{/barang}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Barang</a>
+            <a th:href="@{/pembelian}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Pembelian</a>
+            <a th:href="@{/filter-pembelian}" class="mx-2 btn text-black-50 font-weight-bold" style="background-color: #FFB800;">Filter Pembelian</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

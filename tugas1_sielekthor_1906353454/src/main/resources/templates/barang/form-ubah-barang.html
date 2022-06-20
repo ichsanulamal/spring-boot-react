@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Ubah Barang</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('barang')"></nav>
+
+<div th:if="${falseQty} == true">
+    <script>
+        function myFunction() {
+            alert("GAGAL MENYIMPAN: Periksa kembali isian form");
+        }
+        myFunction()
+    </script>
+</div>
+
+<div class="container">
+    <div class="m-4">
+        <div class="d-flex justify-content-center">
+            <h2>Form Ubah Barang</h2>
+        </div>
+    </div>
+    <div class="card m-4 p-4" style="background-color: lightgrey">
+        <div class="card-body">
+            <div class="justify-content-center">
+                <form th:action="@{/barang/ubah/}" th:object="${barang}" method="POST">
+                    <input required class="form-control" th:field="*{id}" type="text" name="id" hidden/>
+
+                    Nama Barang<br>
+                    <input required class="form-control" th:field="*{namaBarang}" type="text" name="namaBarang" >
+                    <br><br>
+
+                    Kode Barang<br>
+                    <input required class="form-control " th:field="*{kodeBarang}" type="text" name="kodeBarang" readonly />
+                    <br><br>
+
+                    Merk Barang<br>
+                    <input required class="form-control " th:field="*{merkBarang}" type="text" name="merkBarang" readonly />
+                    <br><br>
+
+                    Stok Barang<br>
+                    <input required class="form-control" th:field="*{stok}" type="number" min="0" name="stok" />
+                    <br><br>
+
+                    Garansi Toko<br>
+                    <input required class="form-control" th:field="*{jumlahGaransi}" type="number" min="0" name="jumlahGaransi" />
+                    <br><br>
+
+                    Deskripsi<br>
+                    <input required class="form-control" th:field="*{deskripsiBarang}" type="text" name="deskripsiBarang" />
+                    <br><br>
+
+                    Tipe Barang<br>
+                    <select name="tipe" class="form-control" readonly="readonly">
+                        <option th:value="*{tipe.id}" th:text="*{tipe.namaTipe}">
+                    </select>
+                    <br><br>
+
+                    Harga<br>
+                    <input required class="form-control" th:field="*{hargaBarang}" type="number" min="1" name="hargaBarang" />
+                    <br><br>
+
+                    <div class="d-flex flex-row-reverse">
+                        <button class="btn btn-warning btn-lg" type="submit">Simpan</button>
+                        <a style="margin: 10px;"></a>
+                        <a class="btn btn-light btn-outline-warning btn-lg" th:href="@{/barang}">Batal</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

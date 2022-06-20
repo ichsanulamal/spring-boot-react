@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Barang</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('barang')"></nav>
+<br><br><br>
+
+<div class="container">
+    <div class="d-flex justify-content-center" style="background-color: #FFB800">
+        <h2 style="font-weight: bold; align-content: center; padding: 5px;">Detail Pembelian</h2>
+    </div>
+    <br>
+    <div class="card m-4 p-4">
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-3">No Invoice</div>
+                    <div class="col-sm-9"><p th:text="': ' + ${pembelian.noInvoice}"></p></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Total Harga </div>
+                    <div class="col-sm-9">
+                        <p th:text="': ' + 'Rp' + ${#numbers.formatDecimal(pembelian.total, 1, 'DEFAULT', 2, 'DEFAULT')}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Member </div>
+                    <div class="col-sm-9">
+                        <p th:text="': ' + ${pembelian.member.namaMember}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Jumlah Barang</div>
+                    <div class="col-sm-9">
+                        <p th:text="': ' + ${pembelian.listPembelianBarang.size}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Tanggal Pembelian</div>
+                    <div class="col-sm-9">
+                        <p th:text="': ' + ${#temporals.dayOfWeekNameShort(pembelian.tanggalPembelian)} + ', '
+                            + ${#temporals.day(pembelian.tanggalPembelian)} + ' '
+                            + ${#temporals.monthNameShort(pembelian.tanggalPembelian)} + ' '
+                            + ${#temporals.year(pembelian.tanggalPembelian)}">
+                        </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Nama Admin</div>
+                    <div class="col-sm-9">
+                        <p th:text="': ' + ${pembelian.namaAdmin}"></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">Metode Pembayaran</div>
+                    <div class="col-sm-9">
+                        <p th:if="${pembelian.isCash} == true" th:text="': Tunai'"></p>
+                        <p th:if="${pembelian.isCash} == false" th:text="': Cicil'"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-danger btn-lg" th:href="@{/pembelian/hapus/} + ${pembelian.id}">Hapus</a>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h2 style="font-weight: bold; align-content: center;">Daftar Barang</h2>
+    </div>
+    <div class="m-4 p-4">
+        <div class="">
+            <div class="justify-content-center">
+                <table class="table table-hover" >
+                    <thead style="background-color: #FFB800">
+                    <tr>
+                        <th>No.</th>
+                        <th>Nama</th>
+                        <th>Merk</th>
+                        <th>Tipe</th>
+                        <th>Tanggal Garansi</th>
+                        <th>Harga</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pembelianBarang, iterationStatus : ${pembelian.listPembelianBarang}">
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${pembelianBarang.barang.namaBarang}"></td>
+                        <td th:text="${pembelianBarang.barang.merkBarang}"></td>
+                        <td th:text="${pembelianBarang.barang.tipe.namaTipe}"></td>
+                        <td th:text="${#temporals.dayOfWeekNameShort(pembelianBarang.tanggalGaransi)} + ', '
+                            + ${#temporals.day(pembelianBarang.tanggalGaransi)} + ' '
+                            + ${#temporals.monthNameShort(pembelianBarang.tanggalGaransi)} + ' '
+                            + ${#temporals.year(pembelianBarang.tanggalGaransi)}">
+                        </td>
+
+                        <td th:text="'Rp' + ${#numbers.formatDecimal(pembelianBarang.barang.hargaBarang, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                        <td th:text="${pembelianBarang.quantity}"></td>
+                        <td th:text="'Rp' + ${#numbers.formatDecimal(pembelianBarang.quantity * pembelianBarang.barang.hargaBarang, 1, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <br>
+    </div>
+    <a class="btn btn-outline-warning btn-lg" href="/pembelian">Kembali</a>
+    <br><br><br><br><br>
+</div>
+
+</body>
+</html>

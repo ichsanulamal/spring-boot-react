@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form Tambah Pembelian</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('barang')"></nav>
+
+<div class="container">
+    <div class="m-4 p-4">
+        <div class="">
+            <div class="justify-content-center">
+                <div class="d-flex justify-content-center">
+                    <h2></h2>
+                    <h2 th:inline="text" >
+                        Apakah anda setuju ingin menghapus pembelian dengan nomor invoice
+                        <b style="color: #FFB800" th:text="' ' + ${pembelian.noInvoice} + ' '"></b>
+                        ?
+                    </h2>
+                </div>
+                <br>
+                <form th:action="@{/pembelian/hapus}" method="POST">
+                    <input hidden name="idPembelian" th:value="${pembelian.id}" >
+                    <div class="d-flex justify-content-center">
+                        <a class="btn btn-light btn-outline-warning btn-lg" th:href="@{/pembelian/} + ${pembelian.id}">kembali</a>
+                        <a style="margin: 10px;"></a>
+                        <button class="btn btn-danger btn-lg" type="submit">Setuju</button>
+                    </div>
+                    <div class="row">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Detail Barang</title>
+  <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+  <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+
+<body>
+<nav th:replace="fragments/fragment :: navbar('barang')"></nav>
+
+<div class="container">
+  <div class="m-4 p-4">
+    <div class="">
+      <div class="justify-content-center">
+        <br>
+        <h2 th:inline="text" >
+          Pembelian dengan nomor invoice
+          <b style="color: #FFB800" th:text="' ' + ${pembelian.noInvoice} + ' '"></b>
+          berhasil dihapus dan stok barang bertambah menjadi:
+        </h2>
+        <ul th:each="pembelianBarang : ${pembelian.listPembelianBarang}">
+          <li th:text="'Stok ' + ${pembelianBarang.barang.namaBarang} + ' bertambah menjadi ' + ${pembelianBarang.barang.stok}"></li>
+        </ul>
+        <a class="btn btn-light btn-outline-warning" th:href="@{/pembelian}">Kembali</a>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</body>
+</html>
