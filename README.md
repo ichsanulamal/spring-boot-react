@@ -1,4 +1,6 @@
-Tutorial APAP
+# Tutorial Arsitektur & Pemrograman Aplikasi Perusahaan
+
+Semua pdf tutorial dapat diakses pada https://drive.google.com/drive/folders/13l2XdyIxJ6pGuPUnMKyeftr2M608TI8z?usp=sharing
 
 ## Authors
 * **Muhammad Ichsanul Amal** - *1906353454* - *A*
@@ -339,3 +341,6 @@ Akan ditampilkan list dari kebun safari yang telah ditambahkan.
 
 - [x] Kenapa saya harus belajar APAP? Karena dengan APAP kita dapat mengerti bagaimana cara membangun aplikasi dengan skala besar yang fleksibel sesuai kebutuhan yang diinginkan.
 
+# Referensi
+
+https://github.com/alkwrzm/tutorial-apap
